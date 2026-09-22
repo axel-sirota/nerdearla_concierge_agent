@@ -19,3 +19,5 @@ plans/
 servidor_serper.py
 servidor_serper_v2.py
 servidor_serper_roto.py
+HANDOFF.md
+mcp_servidor.log
