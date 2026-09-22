@@ -130,15 +130,34 @@ def check_syntax(nb: dict) -> list[str]:
     return errs
 
 
-def check_mcp_client_current(nb: dict) -> list[str]:
-    """Flag the deprecated langchain-mcp-adapters surface.
+def _strip_comments(src: str) -> str:
+    """Drop whole-line and trailing `#` comments.
 
-    The workshop uses MCPAdapter from the langchain.mcp namespace. The standalone
-    package is unmaintained and must not appear in any cell.
+    The notebook deliberately NAMES the deprecated APIs in comments, to teach that
+    they moved. Those mentions are the lesson, not the bug, so deprecation checks
+    look at executable code only.
+    """
+    out = []
+    for line in src.splitlines():
+        stripped = line.lstrip()
+        if stripped.startswith("#"):
+            continue
+        # Drop a trailing comment, but not a `#` inside a string literal.
+        if "#" in line and line.count('"') % 2 == 0 and line.count("'") % 2 == 0:
+            line = line.split("#", 1)[0]
+        out.append(line)
+    return "\n".join(out)
+
+
+def check_mcp_client_current(nb: dict) -> list[str]:
+    """Flag the deprecated langchain-mcp-adapters and FastMCP surfaces.
+
+    The workshop uses MCPAdapter from langchain.mcp and MCPServer from
+    mcp.server.mcpserver. Comments mentioning the old names are fine and expected.
     """
     errs: list[str] = []
     for i, c in code_cells(nb):
-        src = cell_src(c)
+        src = _strip_comments(cell_src(c))
         for pat in DEPRECATED_MCP_PATTERNS:
             if pat.search(src):
                 errs.append(
