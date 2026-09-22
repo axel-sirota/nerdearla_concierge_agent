@@ -1,0 +1,22 @@
+# Local tooling and API-verification environment.
+# The workshop notebook installs its own dependencies in Colab via !pip install.
+# This file exists so the notebook's imports can be verified locally before the talk.
+#
+# Versions below were installed and verified working together on 2026-09-21.
+
+# Notebook tooling
+nbformat==5.11.1
+jupyter==1.1.1
+pyflakes==3.4.0
+
+# Workshop stack, mirrored locally to verify import paths and signatures
+openai==3.16.2
+python-dotenv==1.2.3
+mcp==2.2.0
+fastmcp==4.0.5
+langchain==1.4.2
+# Required by create_agent("openai:...") - without it: ImportError on ChatOpenAI
+langchain-openai==1.6.3
+langgraph==1.2.12
+langgraph-supervisor==0.0.31
+langgraph-swarm==0.1.0
