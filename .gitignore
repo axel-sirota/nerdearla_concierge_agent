@@ -1,10 +1,9 @@
 .venv/
 __pycache__/
 
-# Real keys never leave this machine. The template does get committed:
-# the global gitignore blocks .env.* so it needs an explicit un-ignore.
+# Keys come from getpass now, so there is no .env in the workshop flow.
+# This stays ignored for the local build venv, which does use one.
 .env
-!.env.example
 *.pyc
 .ipynb_checkpoints/
 progress.txt

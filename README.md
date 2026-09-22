@@ -20,9 +20,10 @@ supervisor to own the answer. MCP shows up at the end, as what it actually is: a
 
 ## Attendees
 
-Open the notebook in Google Colab. Everything installs from the first cell. Axel shares a
-`.env` file at the workshop with the keys already in it: drop it next to the notebook and
-run. Every cell runs as written, so you can follow along or just watch.
+Open the notebook in Google Colab. Everything installs from the first cell. Axel shares the
+two API keys at the workshop: the second cell asks for them with `getpass`, so you paste
+them in and nothing is stored or shown on screen. Every cell runs as written, so you can
+follow along or just watch.
 
 Mini exercises are marked optional and never block anything. Their solutions are in a
 section at the end, for whenever you go deeper at home.

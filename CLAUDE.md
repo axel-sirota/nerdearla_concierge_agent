@@ -98,9 +98,14 @@ recalled from memory.
 
 - **Colab.** Attendees run in Google Colab, so every dependency is `!pip install -q` in the
   notebook itself. No local setup, no Docker, no cloud accounts.
-- **Keys in a shared `.env` file** that Axel distributes at the workshop, loaded with
-  `python-dotenv`. **NOT `getpass`.** Simpler for a large room of juniors: one file, paste
-  it, move on. `.env` is gitignored; a committed `.env.example` shows the variable names.
+- **Keys via `getpass`** in the setup cell. REVERSED 2026-09-22: the `.env` approach needed
+  attendees to upload a file, which is friction in Colab. `getpass` masks the input, so
+  nothing shows on Axel's screen share or in the saved notebook.
+  `client = OpenAI(api_key=OPENAI_API_KEY)` is explicit; the key also goes into
+  `os.environ` because LangChain and LangGraph look there.
+- **The MCP subprocess gets its key explicitly**, via
+  `PythonStdioTransport(path, env={"SERPER_API_KEY": ...})`. It inherits only a short
+  safe-list, so this is the only way in without a `.env` file. Verified working.
 - **All keys are Axel's, cost absorbed**: OpenAI for the agents, serper.dev for search.
 - **Data source**: serper.dev `/search` with `gl=ar, hl=es` for both flights and hotels.
   Returns `organic[]` with `title` + `snippet`. We wrap it to normalize the messy SERP into
