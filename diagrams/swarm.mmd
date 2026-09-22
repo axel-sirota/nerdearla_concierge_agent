@@ -1,0 +1,11 @@
+graph LR
+    U(["Usuario"])
+    AV["agente_vuelos"]
+    AH["agente_hoteles"]
+    NOTA["Nadie arriba.<br/>Cierra quien la tuvo ultimo."]
+    U --> AV
+    AV ==>|pase| AH
+    AH -.->|pase| AV
+    AH ==>|contesta el ultimo| U
+    AH -.- NOTA
+    style NOTA fill:#f5f5f5,stroke-dasharray: 3 3

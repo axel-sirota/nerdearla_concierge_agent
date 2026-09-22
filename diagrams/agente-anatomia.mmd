@@ -1,0 +1,18 @@
+graph LR
+    subgraph AG["AgenteVuelos"]
+        W{{"while turn < max_turns"}}
+        API["chat.completions.create"]
+        D{"hay tool_calls?"}
+        DIS["self.tools[nombre](**args)"]
+        APP["messages.append(role tool)"]
+        RET["return msg.content"]
+        W --> API --> D
+        D -- no --> RET
+        D -- si --> DIS --> APP --> W
+    end
+    OAI["API de OpenAI"]
+    SERP["serper.dev"]
+    API -.-> OAI
+    DIS -.-> SERP
+    style OAI stroke-dasharray: 5 5
+    style SERP stroke-dasharray: 5 5

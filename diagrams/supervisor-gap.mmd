@@ -1,0 +1,11 @@
+graph TD
+    U(["Usuario: vuelos + hotel"])
+    AV["agente_vuelos"]
+    AH["agente_hoteles"]
+    RV["media respuesta:<br/>los vuelos"]
+    RH["media respuesta:<br/>el hotel"]
+    Q(("?"))
+    U --> AV --> RV --> Q
+    U --> AH --> RH --> Q
+    Q -.->|nadie arma la respuesta| U
+    style Q fill:#ff9999,stroke:#cc0000,stroke-width:3px

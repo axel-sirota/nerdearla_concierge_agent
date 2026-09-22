@@ -1,0 +1,15 @@
+sequenceDiagram
+    actor U as Vos
+    participant C as Tu codigo
+    participant M as Modelo
+    participant S as serper.dev
+
+    U->>C: "buscame vuelos a Bariloche"
+    C->>M: mensajes + lista de tools
+    M-->>C: tool_calls: buscar_vuelos(origen, destino)
+    Note over C: El modelo NO ejecuto nada.<br/>Te pidio que ejecutes vos.
+    C->>S: buscar_vuelos("Buenos Aires", "Bariloche")
+    S-->>C: resultados
+    C->>M: role "tool" + tool_call_id + resultado
+    M-->>C: respuesta final en texto
+    C-->>U: "Vuelos desde ARS 70.457..."

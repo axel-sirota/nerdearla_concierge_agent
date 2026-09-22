@@ -1,0 +1,13 @@
+graph TD
+    subgraph ANTES["Antes"]
+        AG(["1 agente"])
+        T1["6 tools<br/>2 pares se pisan"]
+        AG --> T1
+    end
+    subgraph DESPUES["Ahora"]
+        AV(["agente_vuelos"]) --> TV["buscar_vuelos"]
+        AH(["agente_hoteles"]) --> TH["buscar_hoteles"]
+    end
+    style T1 fill:#ffd6d6
+    style TV fill:#d6f5d6
+    style TH fill:#d6f5d6

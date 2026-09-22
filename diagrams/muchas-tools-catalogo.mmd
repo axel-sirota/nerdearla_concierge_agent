@@ -1,0 +1,19 @@
+graph TD
+    AG(["Un solo agente"])
+    V["buscar_vuelos"]
+    VB["buscar_vuelos_baratos<br/>'mejores precios'"]
+    H["buscar_hoteles"]
+    AL["buscar_alojamiento<br/>'mejores precios'"]
+    T["buscar_transporte<br/>(vaga)"]
+    AC["buscar_actividades<br/>(la unica clara)"]
+    AG --> V
+    AG --> VB
+    AG --> H
+    AG --> AL
+    AG --> T
+    AG --> AC
+    V <-.->|se pisan| VB
+    H <-.->|se pisan| AL
+    style VB fill:#ffd6d6
+    style AL fill:#ffd6d6
+    style AC fill:#d6f5d6

@@ -1,0 +1,14 @@
+graph TD
+    subgraph MANO["A mano"]
+        A1["pregunta"] --> A2["chat.completions.create"]
+        A2 --> A3{"hay tool_calls?"}
+        A3 -- no --> A4["return content"]
+        A3 -- si --> A5["for call: self.tools[...]"]
+        A5 --> A2
+    end
+    subgraph LG["LangGraph"]
+        B1["__start__"] --> B2["model"]
+        B2 -.-> B3["__end__"]
+        B2 -.-> B4["tools"]
+        B4 -.-> B2
+    end

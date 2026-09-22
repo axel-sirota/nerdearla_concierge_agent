@@ -1,0 +1,12 @@
+graph TD
+    U(["Usuario"])
+    S{{"supervisor"}}
+    AV["agente_vuelos"]
+    AH["agente_hoteles"]
+    U --> S
+    S -->|deriva| AV
+    AV -->|vuelve| S
+    S -->|deriva| AH
+    AH -->|vuelve| S
+    S ==>|UNA respuesta| U
+    style S fill:#d6e4ff,stroke:#0052cc,stroke-width:3px

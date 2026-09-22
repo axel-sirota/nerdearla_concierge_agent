@@ -1,0 +1,14 @@
+sequenceDiagram
+    actor U as Usuario
+    participant A as Agente (6 tools)
+
+    U->>A: vuelos + hotel + que hacer
+    Note over A: prompt: "priorizá el precio"
+    A->>A: buscar_vuelos_baratos
+    Note right of A: MAL: queriamos buscar_vuelos
+    A->>A: buscar_alojamiento
+    Note right of A: MAL: queriamos buscar_hoteles
+    A->>A: buscar_actividades
+    Note right of A: OK
+    A-->>U: respuesta prolija, sin ningun error visible
+    Note over U: 2 de 3 patas mal.<br/>Nadie se da cuenta.

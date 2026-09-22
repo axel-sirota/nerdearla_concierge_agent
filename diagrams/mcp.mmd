@@ -1,0 +1,12 @@
+graph LR
+    SP["Servidor MCP<br/>del socio"]
+    SN["Servidor MCP<br/>nuestro (serper)"]
+    AD{{"MCPAdapter"}}
+    AG(["Nuestro agente"])
+    NOTA["El agente no sabe<br/>de quien es el servidor"]
+    SP ---|MCP| AD
+    SN ---|MCP| AD
+    AD --> AG
+    AG -.- NOTA
+    style AD fill:#fff2cc,stroke:#d6b656,stroke-width:2px
+    style NOTA fill:#f5f5f5,stroke-dasharray: 3 3
