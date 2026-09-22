@@ -186,11 +186,30 @@ def check_no_hardcoded_keys(nb: dict) -> list[str]:
     return errs
 
 
+SOLUTIONS_RE = re.compile(r"^#{1,3}\s*Soluciones", re.IGNORECASE | re.MULTILINE)
+
+
 def check_wrap_up(nb: dict) -> list[str]:
-    tail = " ".join(cell_src(c).lower() for c in nb["cells"][-3:])
+    """A closing section must exist.
+
+    The solutions section deliberately sits LAST, after the close, so the final
+    cells are solution code rather than the wrap-up. So look for the closing
+    section anywhere at or after the solutions heading's predecessor, not only
+    in the final three cells.
+    """
+    cells = nb["cells"]
+    split = next(
+        (i for i, c in enumerate(cells)
+         if c["cell_type"] == "markdown" and SOLUTIONS_RE.search(cell_src(c))),
+        None,
+    )
+    # Search the closing region: before the solutions heading if there is one,
+    # otherwise the last 3 cells as before.
+    region = cells[max(0, split - 3):split] if split is not None else cells[-3:]
+    tail = " ".join(cell_src(c).lower() for c in region)
     if any(tok in tail for tok in WRAP_TOKENS):
         return []
-    return [f"no wrap-up token in last 3 cells (expected one of {WRAP_TOKENS})"]
+    return [f"no closing section found (expected one of {WRAP_TOKENS})"]
 
 
 def check_nothing_blocks(nb: dict) -> list[str]:
