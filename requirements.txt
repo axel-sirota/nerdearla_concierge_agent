@@ -4,6 +4,9 @@
 #
 # Versions below were installed and verified working together on 2026-09-21.
 
+# QR codes for the opening and closing cells
+qrcode[pil]==8.2
+
 # Notebook tooling
 nbformat==5.11.1
 jupyter==1.1.1
